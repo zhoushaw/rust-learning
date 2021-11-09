@@ -35,6 +35,11 @@ fn main() {
 
 
     let x = plus_five(6);
+
+
+    let s1 = String::from("hell world");
+    let s2 = s1;
+    println!("{},{}",s1,s2);
 }
 
 fn plus_five(x:i32) ->i32{
