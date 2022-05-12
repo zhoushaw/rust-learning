@@ -157,6 +157,7 @@ let s2 = s1;
 
 
 > Copy trait
+
 * 任何简单标量的组合类型都可以实现 Copy
 * 任何需要分配内存或某种资源的都不是 Copy 
 * Copy trait 的类型
@@ -169,6 +170,58 @@ let s2 = s1;
     * (i32,String) 不是
 
 
+## 所有权和函数
+
+将变量作为参数传入函数时，变量是放在「堆」上会进行转移，放在「堆栈」上会进行拷贝，因此将放在对上的「变量」传入函数时，需要显示返回否则将会出现异常
+
+```rust
+fn main() {
+    let s1 = String::from("hello");   
+    let s3 = takes_and_gives_back(s1); // 返回值可进行使用
+    println!("'{}'", s3); // 使用返回的值正常，所有权回归
+    println!("'{}'", s1); // 不正常所有权已经释放无法在使用
+} 
+
+fn takes_and_gives_back(s: String) -> String {
+    s
+}
+```
+
+但是每次函数使用放在堆上的变量时都需要返回则会需要写大量不必要乏味的代码，因此可以通过「索引」来解决所有权转义的问题。
+
+> 使用索引来解决所有权的问题
+
+```rust
+fn main() {
+    let s1 = String::from("hello");   
+    takes_and_gives_back(&s1); // 返回值可进行使用
+    println!("'{}'", s1); // 正常使用所有权并未发生转义
+} 
+
+fn takes_and_gives_back(s: &String) -> String {
+    s
+}
+```
+
+* 默认情况下索引借用的内容无法修改，需要声明 mut 
+* 同一时间的变量只能有一个 mut 的变量
+* 索引借用不能同时存在两个及两个以上
+* 不能同时存在可变索引和不可变索引（同时存在的范围在最后一次使用的地方，若最后一次时候之后存在可变与不可变不会影响）
+* 切片采用索引的方式获取变量的部分内容，较容易出现不可变和可变的情况出现
+
+```rust
+fn main() {
+    let mut s = String::from("hello");
+
+    change(&mut s);
+}
+
+fn change(some_string: &mut String) {
+    some_string.push_str(", world");
+}
+```
 
 
+## 总结
 
+Rust 通过所有权、借用、切片在编译时来保证内存安全，当数据超出使用范围时会自动回收
