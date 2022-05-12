@@ -37,6 +37,4 @@ cargo build --release
         * authors 项目作者
         * edition 项目使用的 rust 版本
     * dependencies 列出项目的依赖
-        * 
 * src 源文件目录
-* 

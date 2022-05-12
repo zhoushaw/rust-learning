@@ -1,15 +1,15 @@
 fn main() {
     let num: u8 = 255; // 0~255 2^8
 
-    let x = 2.0; // f64
-    let y:f32 = 3.0; // f32
+    let _x = 2.0; // f64
+    let _y:f32 = 3.0; // f32
 
     // 数值操作
-    let sum = 5+10;
-    let difference = 95.5 - 4.3;
-    let product = 4*30;
-    let quotient = 56.7/32.2;
-    let reminder = 54%5;
+    let _sum = 5+10;
+    let _difference = 95.5 - 4.3;
+    let _product = 4*30;
+    let _quotient = 56.7/32.2;
+    let _reminder = 54%5;
     
     println!("result {}",num);
 
@@ -30,19 +30,19 @@ fn main() {
         "May",
         "June",
     ];
-    let first = months[0];
-    let second = months[1];
+    let _first = months[0];
+    let _second = months[1];
 
 
-    let x = plus_five(6);
+    let _x = plus_five(6);
 
 
     let s1 = String::from("hell world");
     let s2 = s1;
-    println!("{},{}",s1,s2);
+    println!("{}",s2);
 }
 
-fn plus_five(x:i32) ->i32{
+fn plus_five(_x:i32) ->i32{
     3
 }
 
