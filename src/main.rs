@@ -1,8 +1,11 @@
 use std::io; // prelude
 use rand::Rng; // trait
 use std::cmp::Ordering;
+use restaurant::front_of_house::hosting::add_to_waitlist;
 
 fn main() {
+    add_to_waitlist();
+    
     println!("猜数!");
 
     let secret_number = rand::thread_rng().gen_range(1,101); // i32 u32 i64
